@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import 'authentication_failure.dart';
 import 'value_objects.dart';
 
-abstract interface class AuthenticationFacadeInterface {
+abstract interface class AuthenticationFacade {
   Future<Either<AuthenticationFailure, Unit>> registerWithEmailAndPassword(
     EmailAddress emailAddress,
     Password password,

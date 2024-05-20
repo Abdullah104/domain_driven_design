@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:fpdart/fpdart.dart';
 
+import 'errors.dart';
 import 'failures.dart';
 
 @immutable
@@ -23,4 +24,10 @@ abstract class ValueObject<T> {
   String toString() => 'Value{value=$value}';
 
   bool isValid() => value.isRight();
+
+  /// Throws [UnexpectedValueError] containing the [ValueFailure]
+  T getOrCrash() => value.fold(
+        (failure) => throw UnexpectedValueError(failure),
+        identity,
+      );
 }
