@@ -9,13 +9,12 @@ class SignInFormState {
   final Option<Either<AuthenticationFailure, Unit>>
       authenticationFailureOrSuccessOption;
 
-  const SignInFormState({
-    required this.emailAddress,
-    required this.password,
-    required this.isSubmitting,
-    required this.showErrorMessages,
-    required this.authenticationFailureOrSuccessOption,
-  });
+  SignInFormState(
+      {required this.emailAddress,
+      required this.password,
+      required this.isSubmitting,
+      required this.showErrorMessages,
+      required this.authenticationFailureOrSuccessOption});
 
   factory SignInFormState.initial() => SignInFormState(
         emailAddress: EmailAddress(''),
@@ -23,5 +22,23 @@ class SignInFormState {
         isSubmitting: false,
         showErrorMessages: false,
         authenticationFailureOrSuccessOption: none(),
+      );
+
+  SignInFormState copyWith({
+    EmailAddress? emailAddress,
+    Password? password,
+    bool? isSubmitting,
+    bool? showErrorMessages,
+    Option<Either<AuthenticationFailure, Unit>>?
+        authenticationFailureOrSuccessOption,
+  }) =>
+      SignInFormState(
+        emailAddress: emailAddress ?? this.emailAddress,
+        password: password ?? this.password,
+        isSubmitting: isSubmitting ?? this.isSubmitting,
+        showErrorMessages: showErrorMessages ?? this.showErrorMessages,
+        authenticationFailureOrSuccessOption:
+            authenticationFailureOrSuccessOption ??
+                this.authenticationFailureOrSuccessOption,
       );
 }
