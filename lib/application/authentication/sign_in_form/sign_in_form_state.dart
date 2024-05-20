@@ -9,12 +9,13 @@ class SignInFormState {
   final Option<Either<AuthenticationFailure, Unit>>
       authenticationFailureOrSuccessOption;
 
-  SignInFormState(
-      {required this.emailAddress,
-      required this.password,
-      required this.isSubmitting,
-      required this.showErrorMessages,
-      required this.authenticationFailureOrSuccessOption});
+  SignInFormState({
+    required this.emailAddress,
+    required this.password,
+    required this.isSubmitting,
+    required this.showErrorMessages,
+    required this.authenticationFailureOrSuccessOption,
+  });
 
   factory SignInFormState.initial() => SignInFormState(
         emailAddress: EmailAddress(''),

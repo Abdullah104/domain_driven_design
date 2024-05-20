@@ -1,11 +1,12 @@
+import 'package:domain_driven_design/domain/authentication/authentication_facade.dart';
+import 'package:domain_driven_design/domain/authentication/authentication_failure.dart';
+import 'package:domain_driven_design/domain/authentication/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 
-import '../../domain/authentication/authentication_facade.dart';
-import '../../domain/authentication/authentication_failure.dart';
-import '../../domain/authentication/value_objects.dart';
-
+@LazySingleton(as: AuthenticationFacade)
 class FirebaseAuthenticationFacade implements AuthenticationFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;

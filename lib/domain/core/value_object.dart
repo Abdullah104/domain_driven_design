@@ -1,8 +1,7 @@
+import 'package:domain_driven_design/domain/core/errors.dart';
+import 'package:domain_driven_design/domain/core/failures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fpdart/fpdart.dart';
-
-import 'errors.dart';
-import 'failures.dart';
 
 @immutable
 abstract class ValueObject<T> {
@@ -11,7 +10,7 @@ abstract class ValueObject<T> {
   const ValueObject();
 
   @override
-  operator ==(Object other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is ValueObject<T> && other.value == value;

@@ -1,13 +1,14 @@
+import 'package:domain_driven_design/domain/authentication/authentication_facade.dart';
+import 'package:domain_driven_design/domain/authentication/authentication_failure.dart';
+import 'package:domain_driven_design/domain/authentication/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
-
-import '../../../domain/authentication/authentication_facade.dart';
-import '../../../domain/authentication/authentication_failure.dart';
-import '../../../domain/authentication/value_objects.dart';
+import 'package:injectable/injectable.dart';
 
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
 
+@lazySingleton
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final AuthenticationFacade _authenticationFacade;
 

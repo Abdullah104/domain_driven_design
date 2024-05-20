@@ -1,6 +1,5 @@
+import 'package:domain_driven_design/domain/core/failures.dart';
 import 'package:fpdart/fpdart.dart';
-
-import 'failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) =>
     RegExp(
