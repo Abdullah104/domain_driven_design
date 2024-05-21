@@ -2,6 +2,7 @@ import 'package:domain_driven_design/domain/core/errors.dart';
 import 'package:domain_driven_design/domain/core/failures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:uuid/uuid.dart';
 
 @immutable
 abstract class ValueObject<T> {
@@ -29,4 +30,16 @@ abstract class ValueObject<T> {
         (failure) => throw UnexpectedValueError(failure),
         identity,
       );
+}
+
+class UniqueId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UniqueId() => UniqueId._(right(const Uuid().v1()));
+
+  factory UniqueId.fromUniqueString(String uniqueId) =>
+      UniqueId._(right(uniqueId));
+
+  const UniqueId._(this.value);
 }

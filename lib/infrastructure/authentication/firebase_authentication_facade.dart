@@ -1,7 +1,9 @@
 import 'package:domain_driven_design/domain/authentication/authentication_facade.dart';
 import 'package:domain_driven_design/domain/authentication/authentication_failure.dart';
+import 'package:domain_driven_design/domain/authentication/user.dart';
 import 'package:domain_driven_design/domain/authentication/value_objects.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:domain_driven_design/infrastructure/authentication/firebase_user_mapper.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -86,6 +88,17 @@ class FirebaseAuthenticationFacade implements AuthenticationFacade {
           ),
         );
   }
+
+  @override
+  Future<Option<User>> getSignedInUser() => Future.value(
+        optionOf(_firebaseAuth.currentUser?.toDomain()),
+      );
+
+  @override
+  Future<void> signOut() => Future.wait([
+        _googleSignIn.signOut(),
+        _firebaseAuth.signOut(),
+      ]);
 
   Future<void> _performAuthenticationOperationWithEmailAndPassword(
     EmailAddress emailAddress,

@@ -1,5 +1,5 @@
 import 'package:domain_driven_design/domain/core/failures.dart';
-import 'package:domain_driven_design/domain/core/value_object.dart';
+import 'package:domain_driven_design/domain/core/value_objects.dart';
 import 'package:domain_driven_design/domain/core/value_validators.dart';
 
 import 'package:fpdart/fpdart.dart';
