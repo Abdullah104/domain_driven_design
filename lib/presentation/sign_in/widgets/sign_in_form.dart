@@ -35,6 +35,7 @@ class SignInForm extends StatelessWidget {
             false => AutovalidateMode.disabled,
           },
           child: ListView(
+            padding: const EdgeInsets.all(8),
             children: [
               const Text(
                 '📝',
@@ -121,6 +122,10 @@ class SignInForm extends StatelessWidget {
                 ),
                 child: const Text('SIGN IN WITH GOOGLE'),
               ),
+              if (state.isSubmitting) ...[
+                const SizedBox(height: 8),
+                const LinearProgressIndicator(),
+              ],
             ],
           ),
         );

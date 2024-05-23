@@ -12,13 +12,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        switch (state) {
-          case Initial():
-            break;
-          case Authenticated():
-          case Unauthenticated():
-            context.router.replace(const SignInRoute());
-        }
+        if (state is Authenticated) context.router.replace(const SignInRoute());
       },
       child: const Scaffold(
         body: Center(

@@ -52,7 +52,8 @@ class FirebaseAuthenticationFacade implements AuthenticationFacade {
       return right(unit);
     } on FirebaseAuthException catch (exception) {
       if (exception.code == 'wrong-password' ||
-          exception.code == 'user-not-found') {
+          exception.code == 'user-not-found' ||
+          exception.code == 'invalid-credential') {
         return left(
           const AuthenticationFailure.invalidEmailAndPasswordCombination(),
         );
