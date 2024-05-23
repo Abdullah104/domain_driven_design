@@ -1,26 +1,39 @@
-import 'package:domain_driven_design/presentation/sign_in/sign_in_page.dart';
+import 'package:domain_driven_design/application/authentication/authentication_bloc.dart';
+import 'package:domain_driven_design/injection.dart';
+import 'package:domain_driven_design/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+  final _appRouter = AppRouter();
+
+  AppWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Notes',
-      debugShowCheckedModeBanner: false,
-      home: const SignInPage(),
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark().copyWith(
-        colorScheme: const ColorScheme.dark(
-          primary: Colors.green,
-          secondary: Colors.blueAccent,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => getIt()
+            ..add(const AuthenticationEvent.authenticationCheckRequested()),
         ),
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+      ],
+      child: MaterialApp.router(
+        title: 'Notes',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark().copyWith(
+          colorScheme: const ColorScheme.dark(
+            primary: Colors.green,
+            secondary: Colors.blueAccent,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
+        routerConfig: _appRouter.config(),
       ),
     );
   }

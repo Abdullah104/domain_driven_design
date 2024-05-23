@@ -10,5 +10,5 @@ Future<void> main() async {
 
   configureInjection();
 
-  runApp(const AppWidget());
+  runApp(AppWidget());
 }
