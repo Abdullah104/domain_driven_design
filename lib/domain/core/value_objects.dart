@@ -8,6 +8,9 @@ import 'package:uuid/uuid.dart';
 abstract class ValueObject<T> {
   Either<ValueFailure<T>, T> get value;
 
+  Either<ValueFailure, Unit> get failureOrUnit =>
+      value.fold(left, (_) => right(unit));
+
   const ValueObject();
 
   @override
